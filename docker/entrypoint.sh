@@ -50,8 +50,8 @@ case ${MIRRORS} in
 esac
 
 # 拉取更新
-# echo -e "\n ======== \n ${Info} ${GreenBG} 正使用 git pull 同步项目 ${Font} \n ======== \n"
-# git pull
+echo -e "\n ======== \n ${Info} ${GreenBG} 正使用 git pull 同步项目 ${Font} \n ======== \n"
+git pull
 
 # 安装依赖
 echo -e "\n ======== \n ${Info} ${GreenBG} 安装/更新 项目运行依赖 ${Font} \n ======== \n"
