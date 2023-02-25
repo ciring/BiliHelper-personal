@@ -25,6 +25,10 @@ WORKDIR /app
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 #RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
+
+# https://github.com/php/php-src/issues/8681
+RUN apk add --no-cache linux-headers
+
 RUN docker-php-ext-install sockets
 
 #RUN if [ "${CN}" = true ]; then export REPO_URL="https://github.com.cnpmjs.org"; fi
@@ -32,6 +36,11 @@ RUN docker-php-ext-install sockets
 #RUN set -ex \
 #    && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 #    && echo "Asia/Shanghai" > /etc/timezone \
+
+# Change timezone
+RUN set -x; \
+    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime; \
+    echo Asia/Shanghais > /etc/timezone
 
 RUN apk add --no-cache git && \
     git clone ${REPO_URL}/ciring/BiliHelper-personal.git --depth=1 /app && \
